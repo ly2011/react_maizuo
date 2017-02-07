@@ -1,0 +1,50 @@
+.fade-enter-active {
+    transition: all .3s ease;
+}
+
+.fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, .5, .8, 1.0);
+}
+
+.fade-enter,
+.fade-leave-active {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+.film-logo {
+    object-fit: cover;
+    width: 100%;
+}
+
+.desc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .info {
+        padding-left: 28px;
+        height: 50px;
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .film-name {
+            color: #333;
+            font-size: 12px;
+            line-height: 15px;
+            user-select: text;
+        }
+        .film-info {
+            font-size: 8px;
+            color: #9a9a9a;
+            line-height: 15px;
+        }
+    }
+    .count {
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        margin-right: 15px;
+        color: #f78360;
+    }
+}
