@@ -1,6 +1,6 @@
-# vue2-maizuo
+# react-maizuo
 
-> vue2-maizuo
+> react-maizuo
 
 > 这是一套基于 `vue2` 的电影频道
 
@@ -8,11 +8,20 @@
 
 - webpack2
 
-- vue2
+- react
 
-- vuex2
+- redux
 
 ##升级
+
+### 2017/02/08
+
+- 注意
+
+```js
+|-src
+  |-redux-store(这里不能写成redux, 会造成导入 redux 模块读取不出来)
+```
 
 ### 2017/01/22
 

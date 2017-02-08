@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import ReactSwipe from 'react-swipe'
 import { Link } from 'react-router'
+import * as actions from '../../redux_store/actions/home'
 import homeStyle from './home.scss'
 
 class Home extends Component {
@@ -8,11 +11,15 @@ class Home extends Component {
     super(props, context)
   }*/
   shouldComponentUpdate (nextProps, nextState) {
-
+    return true
   }
 
   componentDidMount () {
-
+    console.log('fetchBanner: ', this.props.actions.fetchBanner)
+    this.props.actions.fetchBanner(() => {
+      this.props.actions.fetchNowPlaying()
+      this.props.actions.fetchComingSoon()
+    })
   }
 
   renderBanner () {
@@ -104,9 +111,13 @@ class Home extends Component {
   }
 
   render () {
-    const bannerStr = this.renderBanner
-    const nowplayStr = this.renderNowplay
-    const comingStr = this.renderComing
+    const bannerStr = this.renderBanner()
+    const nowplayStr = this.renderNowplay()
+    const comingStr = this.renderComing()
+
+    console.log('bannerStr: ', bannerStr)
+    console.log('nowplayStr: ', nowplayStr)
+    console.log('comingStr: ', comingStr)
     return (
       <div className='home'>
         <div className='banner'>
@@ -121,4 +132,19 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = (state, ownProps) => {
+  return {
+    banner: state.homeState.banner,
+    nowplay: state.homeState.nowplay,
+    coming: state.homeState.coming
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+// export default Home
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
