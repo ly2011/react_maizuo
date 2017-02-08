@@ -11,11 +11,14 @@ class Home extends Component {
     super(props, context)
   }*/
   shouldComponentUpdate (nextProps, nextState) {
-    return true
+    if ((!this.props.banner !== nextProps.banner) || (!this.props.nowplay !== nextProps.nowplay) || (!this.coming !== nextProps.coming)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   componentDidMount () {
-    console.log('fetchBanner: ', this.props.actions.fetchBanner)
     this.props.actions.fetchBanner(() => {
       this.props.actions.fetchNowPlaying()
       this.props.actions.fetchComingSoon()
@@ -114,10 +117,6 @@ class Home extends Component {
     const bannerStr = this.renderBanner()
     const nowplayStr = this.renderNowplay()
     const comingStr = this.renderComing()
-
-    console.log('bannerStr: ', bannerStr)
-    console.log('nowplayStr: ', nowplayStr)
-    console.log('comingStr: ', comingStr)
     return (
       <div className='home'>
         <div className='banner'>

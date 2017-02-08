@@ -1,27 +1,23 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Link } from 'react-router'
+import classNames from 'classnames'
+import * as actions from '../../redux_store/actions/detail'
+
+import detailStyle from './detail.scss'
 
 class Detail extends Component {
 /*  constructor (props, context) {
     super(props, context)
   }*/
   shouldComponentUpdate (nextProps, nextState) {
-
+    return true
   }
 
   componentDidMount () {
-
-  }
-
-  renderBanner () {
-
-  }
-
-  renderNowplay () {
-
-  }
-
-  renderComing () {
-
+    const { id } = this.props.location.query
+    this.props.actions.fetchFilmDetail(id)
   }
 
   formatDate (time) {
@@ -33,18 +29,93 @@ class Detail extends Component {
   }
 
   render () {
-    return (
-      <div className='detail'>
-        <header>
-          <h2>Detail Index</h2>
-        </header>
-        <div className='banner'>
+    const { detail } = this.props
+    const formatDate = this.formatDate
 
+    if (!detail) {
+      return (
+        <div className={detailStyle['detail']}>
+          <p className={detailStyle['no-tip']}>正在查询该影片详情</p>
+        </div>
+      )
+    }
+    const _actorsName = []
+    detail.actors.map((item, index) => {
+      _actorsName.push(<span key={index}>{item.name}</span>)
+    })
+
+    return (
+      <div className={detailStyle['detail']}>
+        <div className={detailStyle['cover']}>
+          <img src={detail.cover.origin} alt=''/>
+        </div>
+        <div className={detailStyle['desc']}>
+          <div className={classNames(detailStyle['title'], detailStyle['cells__title'])}>影片简介</div>
+          <div className={classNames(detailStyle['info'], detailStyle['cells'])}>
+            <div className={detailStyle['cell']}>
+              <div className={detailStyle['cell__hd']}>
+                <div className={detailStyle['label']}>导演：</div>
+              </div>
+              <div className={detailStyle['cell__bd']}>
+                {detail.director}
+              </div>
+            </div>
+            <div className={detailStyle['cell']}>
+              <div className={detailStyle['cell__hd']}>
+                <div className={detailStyle['label']}>主演：</div>
+              </div>
+              <div className={detailStyle['cell__bd']}>
+                {_actorsName}
+              </div>
+            </div>
+            <div className={detailStyle['cell']}>
+              <div className={detailStyle['cell__hd']}>
+                <div className={detailStyle['label']}>地区语言：</div>
+              </div>
+              <div className={detailStyle['cell__bd']}>
+                {detail.nation}({detail.language})
+              </div>
+            </div>
+            <div className={detailStyle['cell']}>
+              <div className={detailStyle['cell__hd']}>
+                <div className={detailStyle['label']}>类型：</div>
+              </div>
+              <div className={detailStyle['cell__bd']}>
+                {detail.category}
+              </div>
+            </div>
+            <div className={detailStyle['cell']}>
+              <div className={detailStyle['cell__hd']}>
+                <div className={detailStyle['label']}>上映日期：</div>
+              </div>
+              <div className={detailStyle['cell__bd']}>
+                {formatDate(detail.premiereAt)}
+              </div>
+            </div>
+            <div className={detailStyle['cell']}>
+              <div className={detailStyle['cell__bd']}>
+                {detail.synopsis}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default Detail
+const mapStateToProps = (state, ownProps) => {
+  return {
+    detail: state.detailState.detail
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+// export default Detail
+export default connect(mapStateToProps, mapDispatchToProps)(Detail)
 
