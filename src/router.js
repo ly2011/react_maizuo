@@ -6,7 +6,7 @@
  */
 
 /**
- * 路由
+ * 路由(升级 react-router3.x --> react-router4.x 后暂时还没处理好，废弃了)
  */
 
  /**
@@ -16,38 +16,57 @@
  * callback: 回调函数，该函数调用时会传一个require参数
  * chunkName: 模块名，用于构建时生成文件时命名使用
  */
+// export default [
+//   {
+//     path: '/',
+//     getComponent (nextState, cb) {
+//       require.ensure([], (require) => {
+//         cb(null, require('./views/App').default)
+//       })
+//     },
+//     indexRoute: {
+//       getComponent (nextState, cb) {
+//         require.ensure([], (require) => {
+//           cb(null, require('./views/Home').default)
+//         })
+//       },
+//     },
+//     childRoutes: [
+//       {
+//         path: 'home',
+//         getComponent (nextState, cb) {
+//           require.ensure([], (require) => {
+//             cb(null, require('./views/Home').default)
+//           })
+//         },
+//       },
+//       {
+//         path: 'detail',
+//         getComponent (nextState, cb) {
+//           require.ensure([], (require) => {
+//             cb(null, require('./views/Detail').default, 'detail/:id')
+//           })
+//         },
+//       }
+//     ]
+//   }
+// ]
+
+import App from './views/App'
+import Home from './views/Home'
+import Detail from './views/Detail'
+
 export default [
   {
     path: '/',
-    getComponent (nextState, cb) {
-      require.ensure([], (require) => {
-        cb(null, require('./views/App').default)
-      })
-    },
-    indexRoute: {
-      getComponent (nextState, cb) {
-        require.ensure([], (require) => {
-          cb(null, require('./views/Home').default)
-        })
-      },
-    },
-    childRoutes: [
-      {
-        path: 'home',
-        getComponent (nextState, cb) {
-          require.ensure([], (require) => {
-            cb(null, require('./views/Home').default)
-          })
-        },
-      },
-      {
-        path: 'detail',
-        getComponent (nextState, cb) {
-          require.ensure([], (require) => {
-            cb(null, require('./views/Detail').default, 'detail/:id')
-          })
-        },
-      }
-    ]
+    component: App
+  },
+  {
+    path: '/home',
+    component: Home
+  },
+  {
+    path: '/detail',
+    component: Detail
   }
 ]

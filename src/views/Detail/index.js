@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
+import { withRouter, Link } from 'react-router-dom'
 import classNames from 'classnames'
 import * as actions from '../../redux_store/actions/detail'
 
@@ -117,5 +118,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 // export default Detail
-export default connect(mapStateToProps, mapDispatchToProps)(Detail)
+// export default connect(mapStateToProps, mapDispatchToProps)(Detail)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Detail))
 

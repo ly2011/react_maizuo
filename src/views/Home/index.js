@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import ReactSwipe from 'react-swipe'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
+import { withRouter, Link } from 'react-router-dom'
 import * as actions from '../../redux_store/actions/home'
 import homeStyle from './home.scss'
 
@@ -146,4 +147,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 // export default Home
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))

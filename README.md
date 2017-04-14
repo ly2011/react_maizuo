@@ -14,6 +14,12 @@
 
 ##升级
 
+### 2017/04/14
+
+- react-router3.x 升级到 react-router4.x
+
+`react-router` 插件改为 `react-router-dom`
+
 ### 2017/02/08
 
 - 注意

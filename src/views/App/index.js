@@ -1,9 +1,17 @@
 import React from 'react'
 
+// const App = (props) => {
+//   return (
+//     <div className='page'>
+//       {props.children}
+//     </div>
+//   )
+// }
+
 const App = (props) => {
   return (
     <div className='page'>
-      {props.children}
+      <h1>这是APP页面</h1>
     </div>
   )
 }

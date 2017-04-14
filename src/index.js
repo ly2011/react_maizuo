@@ -14,10 +14,18 @@ app.$mount('#app')
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, browserHistory, hashHistory } from 'react-router'
+
+// import { Router, browserHistory, hashHistory } from 'react-router'
+import {
+  BrowserRouter as Router,
+  HashRouter,
+  Route,
+  Link
+} from 'react-router-dom'
+
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from './redux_store'
-import routes from './router'
+// import routes from './router'
 import './config'
 
 /**
@@ -25,14 +33,32 @@ import './config'
  * hashHistory : 类似example.com/#/some/path
  */
 
-const oriHistory = process.env.NODE_ENV !== 'production' ? browserHistory : hashHistory
+// const oriHistory = process.env.NODE_ENV !== 'production' ? browserHistory : HashRouter
+const oriHistory = HashRouter
 const store = configureStore()
-const history = syncHistoryWithStore(oriHistory, store)
+// const history = syncHistoryWithStore(oriHistory, store)
+
+// render(
+//   <Provider store={store}>
+//     <Router routes={routes}>
+//     </Router>
+//   </Provider>,
+//   document.getElementById('app')
+// )
+
+import App from './views/App'
+import Home from './views/Home'
+import Detail from './views/Detail'
 
 render(
   <Provider store={store}>
-    <Router history={history} routes={routes}>
-    </Router>
+  <Router>
+    <div>
+      <Route exact path='/' component={App} />
+      <Route path='/home' component={Home} />
+      <Route path='/detail' component={Detail} />
+    </div>
+  </Router>
   </Provider>,
   document.getElementById('app')
 )
