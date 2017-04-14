@@ -113,7 +113,7 @@ module.exports = {
             {
                 test: /\.(scss|sass)$/,
                 include: nodeModulesPath,
-                loader: ['style-loader', 'css-loader', 'sass-loader']
+                loader: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
             },
             {
                 test: /\.less$/,
@@ -134,7 +134,7 @@ module.exports = {
             {
                 test: /\.less$/,
                 include: nodeModulesPath,
-                use: ['style-loader', 'css-loader', 'less-loader']
+                use: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
             },
             {
                 test: /\.(js|jsx)$/,
