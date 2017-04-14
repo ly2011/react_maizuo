@@ -17,7 +17,8 @@ class Detail extends Component {
   }
 
   componentDidMount () {
-    const { id } = this.props.location.query
+    const { id } = this.props.location.state
+
     this.props.actions.fetchFilmDetail(id)
   }
 

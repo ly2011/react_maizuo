@@ -56,7 +56,7 @@ class Home extends Component {
     nowplay.map((item, index) => {
       str.push(
         <div className={homeStyle['item']} key={index}>
-          <Link to={{ pathname: 'detail', query: { id: item.id }}}>
+          <Link to={{ pathname: 'detail', search: '', state: { id: item.id }}}>
             <img className={homeStyle['film-logo']} src={item.cover.origin} alt='' />
             <div className={homeStyle['desc']}>
               <div className={homeStyle['info']}>

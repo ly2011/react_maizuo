@@ -18,7 +18,10 @@
 
 - react-router3.x 升级到 react-router4.x
 
-`react-router` 插件改为 `react-router-dom`
+1. `react-router` 插件改为 `react-router-dom`
+
+2. `Link` 组件传参 `<Link to={{ pathname: 'detail', search: '', state: { id: item.id }}}>`
+
 
 ### 2017/02/08
 

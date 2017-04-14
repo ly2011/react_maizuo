@@ -54,7 +54,7 @@ render(
   <Provider store={store}>
   <Router>
     <div>
-      <Route exact path='/' component={App} />
+      <Route exact path='/' component={Home} />
       <Route path='/home' component={Home} />
       <Route path='/detail' component={Detail} />
     </div>
